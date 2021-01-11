@@ -1,0 +1,76 @@
+:root {
+  --munsell: #00A59C;
+  --wood: #CAA472;
+  --test: #cdebf9;
+  --paper-spacing: 2rem;
+}
+
+* {
+  list-style-type: none;
+  margin: 0; padding: 0;
+}
+
+/* Layout */
+
+.content-control p.content-inner {
+  overflow-wrap: anywhere;
+  margin: 0;
+}
+
+.content-control .container {
+  display: flex;
+  padding-top: 1rem; padding-bottom: 1rem;
+}
+
+.content-control .content-outer {
+  cursor: pointer;
+  user-select: none;
+  flex: 1 1 auto;
+}
+
+.content-control .control {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  flex: 0 0 75px;
+  margin-left: 2rem;
+  user-select: none;
+}
+
+.content-control .control i {
+  align-self: center;
+}
+
+.content-control .control i:hover {
+  cursor: pointer;
+}
+
+textarea {
+  padding: 0.75rem;
+}
+
+textarea[name="add-task"] {
+  width: 100%;
+  height: 100px;
+}
+
+/* Add */
+
+.add.content-control .control {
+  justify-content: flex-end;
+}
+
+/* Tasks */
+
+.content-control.task {
+  border-bottom: 1px solid lightgrey;
+}
+
+.content-control.task.completed .content-inner {
+  text-decoration: line-through;
+}
+
+.task:hover {
+  background-color: #eeeeee;
+}
