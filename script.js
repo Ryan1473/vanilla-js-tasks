@@ -8,6 +8,25 @@
 
   function init()
   {
+    initCheckTasks();
+    addButtonListener();    
+    clearButtonListener();
+  }
+
+  function initCheckTasks()
+  {
+    if (!tempTasksFromStorage) {
+      setTasksStorage([]);
+      tempTasksFromStorage = getTasksFromStorage();
+    } else {
+      tempTasksFromStorage.forEach(task => {
+        renderTask(task);
+      });
+    }
+  }
+
+  function addButtonListener()
+  {
     addTaskButton.addEventListener('click', function() {
       let content =  {
         id: tempTasksFromStorage.length + 1,
@@ -17,21 +36,15 @@
       addNewTask(content);
       renderTask(content);
     });
+  }
 
+  function clearButtonListener()
+  {
     clearTasksButton.addEventListener('click', function() {
       tempTasksFromStorage = [];
       clearStorage();
       deleteAllTasks();
     });
-
-    if (!tempTasksFromStorage) {
-      setTasksStorage([]);
-      tempTasksFromStorage = getTasksFromStorage();
-    } else {
-      tempTasksFromStorage.forEach(task => {
-        renderTask(task);
-      });
-    }
   }
 
   function attachEventListenersToTasks()
@@ -77,18 +90,6 @@
     attachEventListenersToTasks();
   }
 
-  function completeTask(currentTask)
-  {
-    let contentOuter = currentTask.getElementsByClassName("content-outer")[0];
-    contentOuter.addEventListener('click', completeTaskAction);
-    
-    function completeTaskAction() {
-      currentTask.classList.contains("completed") 
-        ? currentTask.classList.remove("completed")
-        : currentTask.classList.add("completed");
-    }
-  }
-
   function deleteAllTasks()
   {
     taskListWrapper.innerHTML = '';
@@ -109,6 +110,18 @@
       });
       setTasksStorage(tempTasksFromStorage);
       currentTask.remove();
+    }
+  }
+
+  function completeTask(currentTask)
+  {
+    let contentOuter = currentTask.getElementsByClassName("content-outer")[0];
+    contentOuter.addEventListener('click', completeTaskAction);
+    
+    function completeTaskAction() {
+      currentTask.classList.contains("completed") 
+        ? currentTask.classList.remove("completed")
+        : currentTask.classList.add("completed");
     }
   }
 
